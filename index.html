@@ -4,16 +4,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Be My ValenTina? 🏎️🌸</title>
+    <title>ValenTina? 🌸</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,600&family=Inter:wght@400;700;900&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --primary-pink: #ff85a2;
+            --dark-pink: #ff4d7d;
             --bg-pink: #fff5f7;
-            --accent-pink: #ffb3c1;
-            --text-gray: #5a5a5a;
+            --caesar-blue: #00d4ff;
+            --deep-rose: #c9184a;
         }
 
-        /* Overlay to ensure audio permissions */
+        /* Film Grain layer */
+        .grain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Grain.png');
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 50;
+            display: none;
+        }
+
+        @keyframes pulseHeart {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        body {
+            background-color: var(--bg-pink);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            transition: background 1.5s ease;
+        }
+
+        .album-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('neverenough.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -3;
+            display: none;
+            filter: brightness(0.4);
+        }
+
+        .blue-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(10, 25, 47, 0.4) 0%, rgba(0, 0, 0, 0.9) 100%);
+            z-index: -2;
+            display: none;
+        }
+
         #overlay {
             position: fixed;
             top: 0;
@@ -26,101 +106,181 @@
             align-items: center;
             z-index: 100;
             cursor: pointer;
-            transition: opacity 0.5s ease;
-        }
-
-        body {
-            background-color: var(--bg-pink);
-            color: var(--text-gray);
-            font-family: 'Segoe UI', Roboto, sans-serif;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow: hidden;
+            transition: opacity 0.8s ease;
         }
 
         .container {
             text-align: center;
-            padding: 2.5rem;
-            border-radius: 25px;
+            padding: 4rem 2.5rem;
+            max-width: 440px;
+            width: 88%;
+            position: relative;
+            z-index: 10;
             background: white;
-            box-shadow: 0 15px 35px rgba(255, 133, 162, 0.15);
-            max-width: 400px;
-            width: 85%;
-            border: 1px solid rgba(255, 184, 198, 0.3);
+            border-radius: 40px;
+            box-shadow: 0 25px 60px -12px rgba(255, 77, 125, 0.15);
+            border: 1px solid rgba(255, 133, 162, 0.12);
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .content-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .secret-badge {
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: white;
+            background: var(--deep-rose);
+            padding: 4px 12px;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+            font-weight: 900;
         }
 
         h1 {
-            color: var(--primary-pink);
-            font-size: 2.2rem;
-            margin: 10px 0;
-            font-weight: 800;
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin: 0;
+            color: var(--deep-rose);
+            line-height: 1.1;
+            letter-spacing: -1.5px;
         }
 
-        .tagline {
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--accent-pink);
-            margin-bottom: 20px;
+        .name-highlight {
             display: block;
+            font-size: 3.5rem;
+            color: var(--primary-pink);
+            margin-bottom: 2rem;
+        }
+
+        /* Structured Info Section */
+        .info-grid {
+            text-align: left;
+            width: 100%;
+            max-width: 300px;
+            margin: 1.5rem 0;
+            border-top: 1px solid #f0f0f0;
+            border-bottom: 1px solid #f0f0f0;
+            padding: 1.5rem 0;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+        }
+
+        .info-label {
+            font-weight: 700;
+            color: var(--dark-pink);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-value {
+            color: #555;
+            font-weight: 400;
+            text-align: right;
         }
 
         .plan-box {
-            background-color: #fffafb;
-            padding: 18px;
-            border-radius: 15px;
-            text-align: left;
-            margin: 20px 0;
+            font-family: 'Inter', sans-serif;
             font-size: 0.95rem;
-            border-left: 4px solid var(--primary-pink);
-            line-height: 1.6;
+            line-height: 1.7;
+            color: #4a4a4a;
+            margin-bottom: 2rem;
+            font-weight: 400;
         }
 
-        .btn-group {
-            margin-top: 30px;
-            position: relative;
-            height: 60px;
+        .btn-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
         }
 
         button {
-            padding: 12px 35px;
-            font-size: 1rem;
-            border-radius: 12px;
+            padding: 22px;
+            border-radius: 20px;
             border: none;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         #yesBtn {
-            background-color: var(--primary-pink);
+            background: linear-gradient(135deg, var(--dark-pink), var(--deep-rose));
             color: white;
-            box-shadow: 0 4px 15px rgba(255, 133, 162, 0.4);
+            box-shadow: 0 10px 20px rgba(201, 24, 74, 0.2);
         }
 
         #noBtn {
-            background-color: #eee;
-            color: #999;
-            position: absolute;
+            background: #fcfcfc;
+            color: #ccc;
+            font-size: 0.7rem;
+            border: 1px solid #f0f0f0;
+        }
+
+        /* Glass states */
+        .glass-mode {
+            background: rgba(0, 0, 0, 0.2) !important;
+            border-color: rgba(255, 255, 255, 0.1) !important;
+            box-shadow: 0 0 100px rgba(0, 0, 0, 0.8) !important;
+            backdrop-filter: blur(30px);
+        }
+
+        .glass-mode h1,
+        .glass-mode .info-label {
+            color: var(--caesar-blue);
+        }
+
+        .glass-mode .info-value,
+        .glass-mode .plan-box {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .glass-mode .info-grid {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-mode .name-highlight {
+            color: transparent;
+            -webkit-text-stroke: 1px var(--caesar-blue);
+        }
+
+        .glass-mode .secret-badge {
+            display: none;
         }
 
         #player-wrapper {
             visibility: hidden;
             position: absolute;
-            top: -1000px;
         }
     </style>
 </head>
 
 <body>
+    <div id="grain-layer" class="grain"></div>
+    <div id="album-bg" class="album-bg"></div>
+    <div id="blue-overlay" class="blue-overlay"></div>
 
     <div id="overlay" onclick="startExperience()">
         <div style="text-align:center;">
-            <div style="font-size: 3rem; margin-bottom: 10px;">💌</div>
-            <p style="color: var(--primary-pink); font-weight: bold; letter-spacing: 1px;">Click to open your letter</p>
+            <div style="font-size: 5.5rem; animation: pulseHeart 2s infinite; cursor: pointer;">💌</div>
+            <h2
+                style="color: var(--dark-pink); font-weight: 900; letter-spacing: 2px; margin-top: 25px; font-size: 1.5rem;">
+                Tina, you have a message</h2>
+            <p
+                style="color: var(--primary-pink); font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; margin-top: 10px; font-weight: 700; opacity: 0.8;">
+                Click to Open</p>
         </div>
     </div>
 
@@ -129,93 +289,129 @@
     </div>
 
     <div class="container" id="main-content">
-        <div style="font-size: 1.5rem;">🏎️ ✨</div>
-        <h1>Will you be my <br><span style="color: #ff4d7d;">ValenTina?</span></h1>
-        <span class="tagline">OLFU Valenzuela • Feb 14</span>
+        <div class="content-wrap" id="main-wrap">
+            <div class="secret-badge">Classified Invitation</div>
+            <h1>BE MY <span class="name-highlight">VALENTINA?</span></h1>
 
-        <div class="plan-box">
-            Sundo kita after class. No fancy pressure—just a long drive, a simple date, and a better playlist.
-        </div>
+            <div class="info-grid">
+                <div class="info-row">
+                    <span class="info-label">Pick-Up:</span>
+                    <span class="info-value">OLFU Valenzuela</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Transport:</span>
+                    <span class="info-value">911 GT3RS</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Date:</span>
+                    <span class="info-value">Feb 14, 2026</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Vibe:</span>
+                    <span class="info-value">Private Lunch</span>
+                </div>
+            </div>
 
-        <div class="btn-group">
-            <button id="yesBtn" onclick="onYesClicked()">Yes, please</button>
-            <button id="noBtn" onmouseover="moveButton()">No</button>
+            <div class="plan-box">
+                Pharmacy school is draining enough. Let's make this <em>lowkey and private</em>. I'm picking you up for
+                a lunch break that’s <em>just for us</em>.
+            </div>
+
+            <div class="btn-stack">
+                <button id="yesBtn" onclick="onYesClicked()">Keep the Secret ✨</button>
+                <button id="noBtn" onclick="handleNo()">Decline Offer</button>
+            </div>
         </div>
     </div>
 
     <script>
-        // Load YouTube API
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
         var player;
-        var chorusStart = 25; // 0:25 mark
+        var chorusStart = 25;
+        var noAttempt = 0;
 
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
-                height: '0',
-                width: '0',
-                videoId: 'Xc2D5NWzsfc', // Your exact link video ID
-                playerVars: {
-                    'autoplay': 0,
-                    'controls': 0,
-                    'start': chorusStart,
-                    'modestbranding': 1
-                },
-                events: {
-                    'onReady': onPlayerReady
-                }
+                height: '0', width: '0', videoId: 'Xc2D5NWzsfc',
+                playerVars: { 'autoplay': 0, 'controls': 0, 'start': chorusStart, 'modestbranding': 1 },
+                events: { 'onReady': (e) => { e.target.setVolume(100); } }
             });
-        }
-
-        function onPlayerReady(event) {
-            event.target.setVolume(100);
         }
 
         function startExperience() {
             document.getElementById('overlay').style.opacity = '0';
-            setTimeout(() => {
-                document.getElementById('overlay').style.display = 'none';
-            }, 500);
+            setTimeout(() => { document.getElementById('overlay').style.display = 'none'; }, 800);
+            if (player && player.seekTo) { player.seekTo(chorusStart); player.pauseVideo(); }
+        }
 
-            // "Pre-warm" the player so the Yes button works instantly
-            if (player && player.seekTo) {
-                player.seekTo(chorusStart);
-                player.pauseVideo();
+        function handleNo() {
+            noAttempt++;
+            const noBtn = document.getElementById('noBtn');
+            const yesBtn = document.getElementById('yesBtn');
+
+            if (noAttempt === 1) {
+                noBtn.innerText = "Access Denied...";
+            } else if (noAttempt === 2) {
+                noBtn.innerText = "Porsche is waiting.";
+                noBtn.style.transform = "scale(0.9)";
+            } else {
+                noBtn.style.transform = "scale(0)";
+                noBtn.style.opacity = "0";
+                yesBtn.style.transform = "scale(1.05)";
+                yesBtn.innerText = "TAKE THE RIDE 🏎️";
+                setTimeout(() => { noBtn.style.display = "none"; }, 400);
             }
         }
 
         function onYesClicked() {
-            if (player && player.playVideo) {
-                player.unMute();
-                player.seekTo(chorusStart);
-                player.playVideo();
-            }
+            if (player && player.playVideo) { player.unMute(); player.seekTo(chorusStart); player.playVideo(); }
 
-            document.getElementById('main-content').innerHTML = `
-                <h1 style="color: #ff4d7d;">🏁 See you!</h1>
-                <p style="margin: 20px 0; line-height: 1.6;">
-                    Playlist is set. <br> 
-                    I'll be waiting for you after school.
-                </p>
-                <div style="font-size: 3.5rem; margin-top: 10px;">💖🏎️🌸</div>
-                <p style="font-size: 0.8rem; color: #ff85a2; margin-top: 25px; font-weight: bold; opacity: 0.8;">
-                    🎶 Now Playing: Valentina — Daniel Caesar
-                </p>
+            document.body.style.backgroundColor = "#000";
+            document.getElementById('grain-layer').style.display = 'block';
+            document.getElementById('album-bg').style.display = 'block';
+            document.getElementById('blue-overlay').style.display = 'block';
+
+            const container = document.getElementById('main-content');
+            container.classList.add('glass-mode');
+
+            container.innerHTML = `
+                <div style="opacity: 0; animation: fadeIn 2.5s forwards; display: flex; flex-direction: column; align-items: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 20px;">🌸</div>
+                    <h1 style="font-size: 3.5rem;">YES.</h1>
+                    <div class="info-grid" style="border-color: rgba(0, 212, 255, 0.2); max-width: 250px;">
+                         <div class="info-row"><span class="info-label">ETA:</span><span class="info-value">Lunch Time</span></div>
+                         <div class="info-row"><span class="info-label">Status:</span><span class="info-value">Confirmed</span></div>
+                    </div>
+                    <p style="margin: 1rem 0; line-height: 2; font-size: 1.1rem; color: rgba(255,255,255,0.9); letter-spacing: 1px; font-weight: 300;">
+                        The GT3RS is warmed up. <br> 
+                        <strong>See you on the 14th, Tina.</strong>
+                    </p>
+                    <div style="font-size: 3rem; filter: drop-shadow(0 0 15px var(--caesar-blue)); margin-top: 1rem;">🌸🌸</div>
+                    <p style="font-size: 0.6rem; color: var(--caesar-blue); margin-top: 4rem; font-weight: 900; letter-spacing: 6px; opacity: 0.8; text-transform: uppercase;">
+                        VALENTINA — DANIEL CAESAR
+                    </p>
+                </div>
             `;
         }
-
-        function moveButton() {
-            const noBtn = document.getElementById('noBtn');
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-            noBtn.style.position = 'fixed';
-            noBtn.style.left = x + 'px';
-            noBtn.style.top = y + 'px';
-        }
     </script>
+
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </body>
 
 </html>
