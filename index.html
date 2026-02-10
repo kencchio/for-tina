@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ValenTina? 🌸</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,600&family=Inter:wght@400;700;900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,600&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-pink: #ff85a2;
@@ -20,41 +18,19 @@
         /* Film Grain layer */
         .grain {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Grain.png');
-            opacity: 0.05;
-            pointer-events: none;
-            z-index: 50;
-            display: none;
+            opacity: 0.05; pointer-events: none; z-index: 50; display: none;
         }
 
         @keyframes pulseHeart {
-
-            0%,
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-
-            50% {
-                transform: scale(1.1);
-                opacity: 0.8;
-            }
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
         }
 
         @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         body {
@@ -71,10 +47,7 @@
 
         .album-bg {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background-image: url('neverenough.jpg');
             background-size: cover;
             background-position: center;
@@ -85,10 +58,7 @@
 
         .blue-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(180deg, rgba(10, 25, 47, 0.4) 0%, rgba(0, 0, 0, 0.9) 100%);
             z-index: -2;
             display: none;
@@ -96,10 +66,7 @@
 
         #overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: var(--bg-pink);
             display: flex;
             justify-content: center;
@@ -129,16 +96,17 @@
             align-items: center;
         }
 
-        .secret-badge {
+        .lowkey-badge {
             font-size: 0.6rem;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: white;
-            background: var(--deep-rose);
-            padding: 4px 12px;
-            border-radius: 4px;
+            color: var(--deep-rose);
+            background: rgba(201, 24, 74, 0.1);
+            padding: 5px 14px;
+            border-radius: 50px;
             margin-bottom: 1.5rem;
-            font-weight: 900;
+            font-weight: 800;
+            border: 1px solid rgba(201, 24, 74, 0.2);
         }
 
         h1 {
@@ -157,7 +125,6 @@
             margin-bottom: 2rem;
         }
 
-        /* Structured Info Section */
         .info-grid {
             text-align: left;
             width: 100%;
@@ -230,40 +197,19 @@
         }
 
         /* Glass states */
-        .glass-mode {
-            background: rgba(0, 0, 0, 0.2) !important;
-            border-color: rgba(255, 255, 255, 0.1) !important;
-            box-shadow: 0 0 100px rgba(0, 0, 0, 0.8) !important;
+        .glass-mode { 
+            background: rgba(0, 0, 0, 0.2) !important; 
+            border-color: rgba(255,255,255,0.1) !important; 
+            box-shadow: 0 0 100px rgba(0,0,0,0.8) !important; 
             backdrop-filter: blur(30px);
         }
+        .glass-mode h1, .glass-mode .info-label { color: var(--caesar-blue); }
+        .glass-mode .info-value, .glass-mode .plan-box { color: rgba(255,255,255,0.8); }
+        .glass-mode .info-grid { border-color: rgba(255,255,255,0.1); }
+        .glass-mode .name-highlight { color: transparent; -webkit-text-stroke: 1px var(--caesar-blue); }
+        .glass-mode .lowkey-badge { display: none; }
 
-        .glass-mode h1,
-        .glass-mode .info-label {
-            color: var(--caesar-blue);
-        }
-
-        .glass-mode .info-value,
-        .glass-mode .plan-box {
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .glass-mode .info-grid {
-            border-color: rgba(255, 255, 255, 0.1);
-        }
-
-        .glass-mode .name-highlight {
-            color: transparent;
-            -webkit-text-stroke: 1px var(--caesar-blue);
-        }
-
-        .glass-mode .secret-badge {
-            display: none;
-        }
-
-        #player-wrapper {
-            visibility: hidden;
-            position: absolute;
-        }
+        #player-wrapper { visibility: hidden; position: absolute; }
     </style>
 </head>
 
@@ -275,24 +221,18 @@
     <div id="overlay" onclick="startExperience()">
         <div style="text-align:center;">
             <div style="font-size: 5.5rem; animation: pulseHeart 2s infinite; cursor: pointer;">💌</div>
-            <h2
-                style="color: var(--dark-pink); font-weight: 900; letter-spacing: 2px; margin-top: 25px; font-size: 1.5rem;">
-                Tina, you have a message</h2>
-            <p
-                style="color: var(--primary-pink); font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; margin-top: 10px; font-weight: 700; opacity: 0.8;">
-                Click to Open</p>
+            <h2 style="color: var(--dark-pink); font-weight: 900; letter-spacing: 2px; margin-top: 25px; font-size: 1.5rem;">Tina, you have a message</h2>
+            <p style="color: var(--primary-pink); font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; margin-top: 10px; font-weight: 700; opacity: 0.8;">Open Lowkey Plan</p>
         </div>
     </div>
 
-    <div id="player-wrapper">
-        <div id="player"></div>
-    </div>
+    <div id="player-wrapper"><div id="player"></div></div>
 
     <div class="container" id="main-content">
         <div class="content-wrap" id="main-wrap">
-            <div class="secret-badge">Classified Invitation</div>
+            <div class="lowkey-badge">Lowkey Invitation</div>
             <h1>BE MY <span class="name-highlight">VALENTINA?</span></h1>
-
+            
             <div class="info-grid">
                 <div class="info-row">
                     <span class="info-label">Pick-Up:</span>
@@ -308,17 +248,16 @@
                 </div>
                 <div class="info-row">
                     <span class="info-label">Vibe:</span>
-                    <span class="info-value">Private Lunch</span>
+                    <span class="info-value">Chill Lunch</span>
                 </div>
             </div>
 
             <div class="plan-box">
-                Pharmacy school is draining enough. Let's make this <em>lowkey and private</em>. I'm picking you up for
-                a lunch break that’s <em>just for us</em>.
+                Pharmacy school is draining enough. Let's keep this <em>private and lowkey</em>. I'm picking you up for a lunch break that’s <em>just for us</em>.
             </div>
 
             <div class="btn-stack">
-                <button id="yesBtn" onclick="onYesClicked()">Keep the Secret ✨</button>
+                <button id="yesBtn" onclick="onYesClicked()">Confirm Choice ✨</button>
                 <button id="noBtn" onclick="handleNo()">Decline Offer</button>
             </div>
         </div>
@@ -331,7 +270,7 @@
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
         var player;
-        var chorusStart = 25;
+        var chorusStart = 20; // Updated to 0:20
         var noAttempt = 0;
 
         function onYouTubeIframeAPIReady() {
@@ -354,7 +293,7 @@
             const yesBtn = document.getElementById('yesBtn');
 
             if (noAttempt === 1) {
-                noBtn.innerText = "Access Denied...";
+                noBtn.innerText = "System Failure...";
             } else if (noAttempt === 2) {
                 noBtn.innerText = "Porsche is waiting.";
                 noBtn.style.transform = "scale(0.9)";
@@ -369,28 +308,28 @@
 
         function onYesClicked() {
             if (player && player.playVideo) { player.unMute(); player.seekTo(chorusStart); player.playVideo(); }
-
+            
             document.body.style.backgroundColor = "#000";
             document.getElementById('grain-layer').style.display = 'block';
             document.getElementById('album-bg').style.display = 'block';
             document.getElementById('blue-overlay').style.display = 'block';
-
+            
             const container = document.getElementById('main-content');
             container.classList.add('glass-mode');
-
+            
             container.innerHTML = `
                 <div style="opacity: 0; animation: fadeIn 2.5s forwards; display: flex; flex-direction: column; align-items: center;">
                     <div style="font-size: 2.5rem; margin-bottom: 20px;">🌸</div>
                     <h1 style="font-size: 3.5rem;">YES.</h1>
                     <div class="info-grid" style="border-color: rgba(0, 212, 255, 0.2); max-width: 250px;">
-                         <div class="info-row"><span class="info-label">ETA:</span><span class="info-value">Lunch Time</span></div>
                          <div class="info-row"><span class="info-label">Status:</span><span class="info-value">Confirmed</span></div>
+                         <div class="info-row"><span class="info-label">Plan:</span><span class="info-value">Lowkey</span></div>
                     </div>
                     <p style="margin: 1rem 0; line-height: 2; font-size: 1.1rem; color: rgba(255,255,255,0.9); letter-spacing: 1px; font-weight: 300;">
                         The GT3RS is warmed up. <br> 
-                        <strong>See you on the 14th, Tina.</strong>
+                        <strong>See you on the 14th.</strong>
                     </p>
-                    <div style="font-size: 3rem; filter: drop-shadow(0 0 15px var(--caesar-blue)); margin-top: 1rem;">🌸🌸</div>
+                    <div style="font-size: 3rem; filter: drop-shadow(0 0 10px var(--caesar-blue)); margin-top: 1rem;">🌸🌸🌸</div>
                     <p style="font-size: 0.6rem; color: var(--caesar-blue); margin-top: 4rem; font-weight: 900; letter-spacing: 6px; opacity: 0.8; text-transform: uppercase;">
                         VALENTINA — DANIEL CAESAR
                     </p>
@@ -400,18 +339,7 @@
     </script>
 
     <style>
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </body>
-
 </html>
