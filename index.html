@@ -269,7 +269,7 @@
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
         var player;
-        var chorusStart = 20; // Music set to start at 0:20
+        var chorusStart = 20; 
         var noAttempt = 0;
 
         function onYouTubeIframeAPIReady() {
@@ -283,7 +283,7 @@
         function startExperience() {
             document.getElementById('overlay').style.opacity = '0';
             setTimeout(() => { document.getElementById('overlay').style.display = 'none'; }, 800);
-            if (player && player.seekTo) { player.seekTo(chorusStart); player.playVideo(); }
+            // Removed music trigger from here so it stays quiet on the invitation page
         }
 
         function handleNo() {
@@ -302,7 +302,13 @@
         }
 
         function onYesClicked() {
-            if (player && player.playVideo) { player.unMute(); player.seekTo(chorusStart); player.playVideo(); }
+            // Music only starts here
+            if (player && player.playVideo) { 
+                player.unMute(); 
+                player.seekTo(chorusStart); 
+                player.playVideo(); 
+            }
+
             document.body.style.backgroundColor = "#000";
             document.getElementById('grain-layer').style.display = 'block';
             document.getElementById('album-bg').style.display = 'block';
