@@ -96,17 +96,16 @@
             align-items: center;
         }
 
-        .lowkey-badge {
+        .secret-badge {
             font-size: 0.6rem;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: var(--deep-rose);
-            background: rgba(201, 24, 74, 0.1);
-            padding: 5px 14px;
-            border-radius: 50px;
+            color: white;
+            background: var(--deep-rose);
+            padding: 4px 12px;
+            border-radius: 4px;
             margin-bottom: 1.5rem;
-            font-weight: 800;
-            border: 1px solid rgba(201, 24, 74, 0.2);
+            font-weight: 900;
         }
 
         h1 {
@@ -196,18 +195,18 @@
             border: 1px solid #f0f0f0;
         }
 
-        /* Glass states */
-        .glass-mode { 
-            background: rgba(0, 0, 0, 0.2) !important; 
-            border-color: rgba(255,255,255,0.1) !important; 
-            box-shadow: 0 0 100px rgba(0,0,0,0.8) !important; 
+        .glass-mode {
+            background: rgba(0, 0, 0, 0.2) !important;
+            border-color: rgba(255, 255, 255, 0.1) !important;
+            box-shadow: 0 0 100px rgba(0, 0, 0, 0.8) !important;
             backdrop-filter: blur(30px);
         }
+
         .glass-mode h1, .glass-mode .info-label { color: var(--caesar-blue); }
-        .glass-mode .info-value, .glass-mode .plan-box { color: rgba(255,255,255,0.8); }
-        .glass-mode .info-grid { border-color: rgba(255,255,255,0.1); }
+        .glass-mode .info-value, .glass-mode .plan-box { color: rgba(255, 255, 255, 0.8); }
+        .glass-mode .info-grid { border-color: rgba(255, 255, 255, 0.1); }
         .glass-mode .name-highlight { color: transparent; -webkit-text-stroke: 1px var(--caesar-blue); }
-        .glass-mode .lowkey-badge { display: none; }
+        .glass-mode .secret-badge { display: none; }
 
         #player-wrapper { visibility: hidden; position: absolute; }
     </style>
@@ -222,7 +221,7 @@
         <div style="text-align:center;">
             <div style="font-size: 5.5rem; animation: pulseHeart 2s infinite; cursor: pointer;">💌</div>
             <h2 style="color: var(--dark-pink); font-weight: 900; letter-spacing: 2px; margin-top: 25px; font-size: 1.5rem;">Tina, you have a message</h2>
-            <p style="color: var(--primary-pink); font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; margin-top: 10px; font-weight: 700; opacity: 0.8;">Open Lowkey Plan</p>
+            <p style="color: var(--primary-pink); font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; margin-top: 10px; font-weight: 700; opacity: 0.8;">Click to Open</p>
         </div>
     </div>
 
@@ -230,9 +229,9 @@
 
     <div class="container" id="main-content">
         <div class="content-wrap" id="main-wrap">
-            <div class="lowkey-badge">Lowkey Invitation</div>
+            <div class="secret-badge">Classified Invitation</div>
             <h1>BE MY <span class="name-highlight">VALENTINA?</span></h1>
-            
+
             <div class="info-grid">
                 <div class="info-row">
                     <span class="info-label">Pick-Up:</span>
@@ -248,16 +247,16 @@
                 </div>
                 <div class="info-row">
                     <span class="info-label">Vibe:</span>
-                    <span class="info-value">Lunch Date</span>
+                    <span class="info-value">Private Lunch</span>
                 </div>
             </div>
 
             <div class="plan-box">
-                Pharmacy school is draining enough. Let's keep this <em>private and lowkey</em>. I'm picking you up for a lunch break that’s <em>just for us. Tina and Ken :P</em>.
+                Pharmacy school is draining enough. Let's make this <em>lowkey and private</em>. I'm picking you up for a lunch break that’s <em>just for us</em>.
             </div>
 
             <div class="btn-stack">
-                <button id="yesBtn" onclick="onYesClicked()">Confirm Choice ✨</button>
+                <button id="yesBtn" onclick="onYesClicked()">Keep the Secret ✨</button>
                 <button id="noBtn" onclick="handleNo()">Decline Offer</button>
             </div>
         </div>
@@ -270,7 +269,7 @@
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
         var player;
-        var chorusStart = 20; // Updated to 0:20
+        var chorusStart = 20; // Music set to start at 0:20
         var noAttempt = 0;
 
         function onYouTubeIframeAPIReady() {
@@ -284,20 +283,16 @@
         function startExperience() {
             document.getElementById('overlay').style.opacity = '0';
             setTimeout(() => { document.getElementById('overlay').style.display = 'none'; }, 800);
-            if (player && player.seekTo) { player.seekTo(chorusStart); player.pauseVideo(); }
+            if (player && player.seekTo) { player.seekTo(chorusStart); player.playVideo(); }
         }
 
         function handleNo() {
             noAttempt++;
             const noBtn = document.getElementById('noBtn');
             const yesBtn = document.getElementById('yesBtn');
-
-            if (noAttempt === 1) {
-                noBtn.innerText = "System Failure...";
-            } else if (noAttempt === 2) {
-                noBtn.innerText = "Porsche is waiting.";
-                noBtn.style.transform = "scale(0.9)";
-            } else {
+            if (noAttempt === 1) { noBtn.innerText = "Access Denied..."; } 
+            else if (noAttempt === 2) { noBtn.innerText = "Porsche is waiting."; noBtn.style.transform = "scale(0.9)"; } 
+            else {
                 noBtn.style.transform = "scale(0)";
                 noBtn.style.opacity = "0";
                 yesBtn.style.transform = "scale(1.05)";
@@ -308,28 +303,25 @@
 
         function onYesClicked() {
             if (player && player.playVideo) { player.unMute(); player.seekTo(chorusStart); player.playVideo(); }
-            
             document.body.style.backgroundColor = "#000";
             document.getElementById('grain-layer').style.display = 'block';
             document.getElementById('album-bg').style.display = 'block';
             document.getElementById('blue-overlay').style.display = 'block';
-            
             const container = document.getElementById('main-content');
             container.classList.add('glass-mode');
-            
             container.innerHTML = `
                 <div style="opacity: 0; animation: fadeIn 2.5s forwards; display: flex; flex-direction: column; align-items: center;">
                     <div style="font-size: 2.5rem; margin-bottom: 20px;">🌸</div>
                     <h1 style="font-size: 3.5rem;">YES.</h1>
                     <div class="info-grid" style="border-color: rgba(0, 212, 255, 0.2); max-width: 250px;">
+                         <div class="info-row"><span class="info-label">ETA:</span><span class="info-value">Lunch Time</span></div>
                          <div class="info-row"><span class="info-label">Status:</span><span class="info-value">Confirmed</span></div>
-                         <div class="info-row"><span class="info-label">Plan:</span><span class="info-value">Lowkey</span></div>
                     </div>
                     <p style="margin: 1rem 0; line-height: 2; font-size: 1.1rem; color: rgba(255,255,255,0.9); letter-spacing: 1px; font-weight: 300;">
                         The GT3RS is warmed up. <br> 
-                        <strong>See you on the 14th.</strong>
+                        <strong>See you on the 14th, Tina.</strong>
                     </p>
-                    <div style="font-size: 3rem; filter: drop-shadow(0 0 10px var(--caesar-blue)); margin-top: 1rem;">🌸🌸🌸</div>
+                    <div style="font-size: 3rem; filter: drop-shadow(0 0 15px var(--caesar-blue)); margin-top: 1rem;">🌸🌸</div>
                     <p style="font-size: 0.6rem; color: var(--caesar-blue); margin-top: 4rem; font-weight: 900; letter-spacing: 6px; opacity: 0.8; text-transform: uppercase;">
                         VALENTINA — DANIEL CAESAR
                     </p>
@@ -337,7 +329,6 @@
             `;
         }
     </script>
-
     <style>
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
